@@ -29,13 +29,17 @@ locals {
   # ── Target repository set ─────────────────────────────────────────────────
   all_discovered = toset(data.github_repositories.all.names)
 
-  # When var.repo_filter is set, restrict to that single repository (if it was
-  # discovered); otherwise operate on the full discovered set.
-  target_repo_names = var.repo_filter != "" ? (
-    contains(local.all_discovered, var.repo_filter)
-    ? toset([var.repo_filter])
-    : toset([])
-  ) : local.all_discovered
+  # Prefix filters can come from the YAML config or from the Terraform var.
+  repo_filters = length(var.repo_filter) > 0 ? var.repo_filter : lookup(local.config, "filter", [])
+
+  # When filters are set, restrict to repositories whose names start with one
+  # of the accepted prefixes; otherwise operate on the full discovered set.
+  target_repo_names = length(local.repo_filters) > 0 ? toset(flatten([
+    for prefix in local.repo_filters : [
+      for name in local.all_discovered : name
+      if startswith(name, prefix)
+    ]
+  ])) : local.all_discovered
 
   # ── Merged per-repository configurations ─────────────────────────────────
   # Repositories explicitly listed in the YAML 'repositories' section AND

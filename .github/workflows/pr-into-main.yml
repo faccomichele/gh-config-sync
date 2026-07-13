@@ -24,6 +24,7 @@ jobs:
     with:
       environment: 'dev'
       region: 'eu-central-1'
+      global: true
       working-directory: '.'
       action: 'plan'
     secrets: inherit

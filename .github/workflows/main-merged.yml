@@ -25,6 +25,7 @@ jobs:
     with:
       environment: 'dev'
       region: 'eu-central-1'
+      global: true
       working-directory: '.'
       action: 'apply'
     secrets: inherit

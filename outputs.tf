@@ -14,11 +14,11 @@ output "label_managed_repositories" {
 }
 
 output "repo_filter_active" {
-  description = "Whether a single-repository filter is currently active."
-  value       = var.repo_filter != ""
+  description = "Whether one or more repository prefix filters are currently active."
+  value       = length(local.repo_filters) > 0
 }
 
 output "active_repo_filter" {
-  description = "The repository name used as a filter, or null when no filter is active."
-  value       = var.repo_filter != "" ? var.repo_filter : null
+  description = "The repository name prefixes used as filters, or null when no filter is active."
+  value       = length(local.repo_filters) > 0 ? local.repo_filters : null
 }

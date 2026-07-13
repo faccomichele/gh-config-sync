@@ -17,9 +17,9 @@ github_token = "ghp_xxxxxxxxxxxxxxxxxxxx"
 # Optional
 # ---------------------------------------------------------------------------
 
-# Restrict changes to a single repository (useful for testing).
-# Set to "" to process all discovered repositories.
-repo_filter = ""
+# Restrict changes to repositories whose names start with one of these prefixes.
+# Set to [] to process all discovered repositories.
+repo_filter = ["aws-", "gh-", "gha-"]
 
 # Path to the YAML configuration file.
 # config_file = "config/repos.yaml"
