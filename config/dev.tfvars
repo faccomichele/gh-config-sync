@@ -1,4 +1,5 @@
-filter:
-  - "aws-"
-  - "gh-"
-  - "gha-"
+repo_filter = [
+  "aws-",
+  "gh-",
+  "gha-"
+]
