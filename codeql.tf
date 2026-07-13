@@ -15,10 +15,8 @@ resource "github_repository_file" "codeql_workflow" {
     name: "CodeQL"
 
     on:
-      push:
-        branches: ["**"]
       pull_request:
-        branches: ["**"]
+        branches: ["main"]
       schedule:
         - cron: "30 2 * * 0"
 
