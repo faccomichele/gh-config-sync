@@ -21,5 +21,9 @@ github_token = "ghp_xxxxxxxxxxxxxxxxxxxx"
 # Set to [] to process all discovered repositories.
 repo_filter = ["aws-", "gh-", "gha-"]
 
+# Optional numeric GitHub user ID used when environments.reviewers.current=true.
+# Required when authenticating with a GitHub App installation token.
+# current_reviewer_user_id = 12345678
+
 # Path to the YAML configuration file.
 # config_file = "config/repos.yaml"

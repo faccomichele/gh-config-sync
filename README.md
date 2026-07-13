@@ -235,6 +235,7 @@ rulesets:
 | `github_token` | string | — | GitHub PAT (sensitive) |
 | `org_name` | string | — | GitHub organization name |
 | `repo_filter` | list(string) | `[]` | Limit to repositories matching one or more name prefixes; empty = all repos |
+| `current_reviewer_user_id` | number | `null` | Optional user ID used when `reviewers.current=true`; required for GitHub App IAT auth |
 | `config_file` | string | `"config/repos.yaml"` | Path to YAML config |
 
 ---

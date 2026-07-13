@@ -9,10 +9,6 @@ data "github_repositories" "all" {
   results_per_page = 100
 }
 
-data "github_user" "current" {
-  username = ""
-}
-
 # ---------------------------------------------------------------------------
 # Local values — parse config, compute targets, flatten child resources
 # ---------------------------------------------------------------------------

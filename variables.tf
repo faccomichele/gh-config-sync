@@ -25,3 +25,9 @@ variable "repo_filter" {
   type        = list(string)
   default     = []
 }
+
+# variable "current_reviewer_user_id" {
+#   description = "Optional numeric GitHub user ID used when environments.reviewers.current=true. Required when using GitHub App installation tokens."
+#   type        = number
+#   default     = null
+# }
