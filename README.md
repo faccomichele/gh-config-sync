@@ -9,7 +9,8 @@
 1. **Discover** all non-archived repositories in a GitHub organization automatically.
 2. **Read** a YAML configuration file (`config/repos.yaml`) that defines the desired state.
 3. **Detect and apply drift** — repository settings, labels, environments, and rulesets.
-4. **Filter** to a single repository for safe, incremental testing.
+4. **Filter** to repositories by prefix for safe, incremental testing.
+5. **Enable CodeQL scanning** by managing a standard workflow file in target repositories.
 
 ## Prerequisites
 
@@ -63,11 +64,12 @@ terraform apply
 
 ### Test against a single repository
 
-Use `repo_filter` to limit the scope to one repository before rolling out org-wide:
+Use `repo_filter` to limit the scope to repositories whose names start with one
+or more prefixes before rolling out org-wide:
 
 ```sh
-terraform plan  -var="repo_filter=my-repo-name"
-terraform apply -var="repo_filter=my-repo-name"
+terraform plan  -var='repo_filter=["aws-", "gh-", "gha-"]'
+terraform apply -var='repo_filter=["aws-", "gh-", "gha-"]'
 ```
 
 ---
@@ -232,7 +234,8 @@ rulesets:
 |----------|------|---------|-------------|
 | `github_token` | string | — | GitHub PAT (sensitive) |
 | `org_name` | string | — | GitHub organization name |
-| `repo_filter` | string | `""` | Limit to a single repo name; empty = all repos |
+| `repo_filter` | list(string) | `[]` | Limit to repositories matching one or more name prefixes; empty = all repos |
+| `current_reviewer_user_id` | number | `null` | Optional user ID used when `reviewers.current=true`; required for GitHub App IAT auth |
 | `config_file` | string | `"config/repos.yaml"` | Path to YAML config |
 
 ---
@@ -301,6 +304,7 @@ terraform {
 ├── labels.tf                 # github_issue_label resources
 ├── environments.tf           # github_repository_environment resources
 ├── rulesets.tf               # github_repository_ruleset resources
+├── codeql.tf                 # github_repository_file resources for CodeQL workflow
 ├── outputs.tf                # Useful outputs
 └── terraform.tfvars.example  # Example variable values
 ```
