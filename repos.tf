@@ -55,6 +55,16 @@ resource "github_repository" "repos" {
   vulnerability_alerts = lookup(each.value, "vulnerability_alerts", null)
   archived             = lookup(each.value, "archived", null)
 
+  security_and_analysis {
+    secret_scanning {
+      status = lookup(each.value, "secret_scanning", true) ? "enabled" : "disabled"
+    }
+
+    secret_scanning_push_protection {
+      status = lookup(each.value, "secret_scanning_push_protection", true) ? "enabled" : "disabled"
+    }
+  }
+
   lifecycle {
     # Prevent accidental repository deletion.
     # To stop managing a repo run:
