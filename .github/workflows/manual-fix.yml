@@ -1,0 +1,29 @@
+# This triggers on all merged PRs into main
+
+name: Manual - Remove Stale Resource from State File
+
+on:
+  workflow_dispatch:
+    inputs:
+      resource:
+        description: 'The Terraform resource address to remove from the state file (e.g. module.example.aws_s3_bucket.example)'
+        required: true
+        default: ''
+
+permissions:
+  id-token: write
+  pull-requests: write
+  contents: read
+  
+jobs:
+  dev:
+    name: "[DEV]"
+    uses: faccomichele/gha-reusables/.github/workflows/terraform-run.yml@main
+    with:
+      environment: 'dev'
+      region: 'eu-central-1'
+      global: true
+      working-directory: '.'
+      action: 'state'
+      action-args: '${{ inputs.resource }}'
+    secrets: inherit
