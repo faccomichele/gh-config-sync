@@ -25,5 +25,5 @@ jobs:
       global: true
       working-directory: '.'
       action: 'state'
-      action-args: '${{ inputs.resource }}'
+      action-arguments: '${{ inputs.resource }}'
     secrets: inherit
