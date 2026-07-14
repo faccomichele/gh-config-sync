@@ -289,6 +289,22 @@ terraform {
   GitHub Actions secrets.
 - The minimum required PAT scopes are `repo` and `admin:org`.
 
+### Enable Private Vulnerability Reporting
+
+The Terraform GitHub provider (v6.12.0 in this repo) does not currently expose
+the `private_vulnerability_reporting` setting on `github_repository`, so this
+toggle cannot be managed declaratively in Terraform yet.
+
+Use the script below to enable it for all non-archived repositories in an org,
+optionally filtered by name prefixes:
+
+PowerShell example:
+
+scripts/enable-private-vulnerability-reporting.ps1 \
+  -Organization "my-organization" \
+  -Token "$env:TF_VAR_github_token" \
+  -Prefixes "aws-","gh-","gha-"
+
 ---
 
 ## File Structure
