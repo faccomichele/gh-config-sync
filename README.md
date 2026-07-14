@@ -304,7 +304,6 @@ terraform {
 ├── labels.tf                 # github_issue_label resources
 ├── environments.tf           # github_repository_environment resources
 ├── rulesets.tf               # github_repository_ruleset resources
-├── codeql.tf                 # github_repository_file resources for CodeQL workflow
 ├── outputs.tf                # Useful outputs
 └── terraform.tfvars.example  # Example variable values
 ```
